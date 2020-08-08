@@ -156,7 +156,9 @@ public enum Pygments: TokenizationScheme {
             token = Token(identifier, kind: Name.PseudoBuiltin.self)
         case .unknown(let string):
             token = Token(string, kind: Other.self)
-        case .eof:
+        case .awaitKeyword,
+             .eof,
+             .poundFileIDKeyword:
             break
         }
 
