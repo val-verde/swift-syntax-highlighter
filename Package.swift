@@ -11,17 +11,19 @@ let package = Package(
     products: [
         .library(
             name: "SwiftSyntaxHighlighter",
+            type: .dynamic,
             targets: ["SwiftSyntaxHighlighter"]),
         .executable(name: "swift-highlight",
                     targets: ["swift-highlight"])
     ],
     dependencies: [
-        .package(name: "SwiftSyntax", url: "https://github.com/val-verde/swift-syntax.git", .branch("val-verde-mainline")),
-        .package(url: "https://github.com/val-verde/swift-argument-parser.git", .branch("val-verde-mainline")),
     ],
     targets: [
         .target(name: "Highlighter",
-                dependencies: ["SwiftSyntax"]),
+                dependencies: [],
+                linkerSettings: [
+                    .linkedLibrary("SwiftSyntax"),
+                ]),
         .target(name: "Pygments",
                 dependencies: ["Highlighter"],
                 path: "Sources/TokenizationSchemes/Pygments"),
@@ -32,11 +34,16 @@ let package = Package(
             name: "swift-highlight",
             dependencies: [
                 "SwiftSyntaxHighlighter",
-                .product(name: "ArgumentParser", package: "swift-argument-parser")
+            ],
+            linkerSettings: [
+                .linkedLibrary("ArgumentParser"),
             ]),
         .target(
             name: "SwiftSyntaxHighlighter",
-            dependencies: ["SwiftSyntax", "Highlighter", "Xcode", "Pygments"]),
+            dependencies: ["Highlighter", "Xcode", "Pygments"],
+            linkerSettings: [
+                .linkedLibrary("ArgumentParser"),
+            ]),
         .testTarget(
             name: "SwiftSyntaxHighlighterTests",
             dependencies: ["SwiftSyntaxHighlighter"]),
