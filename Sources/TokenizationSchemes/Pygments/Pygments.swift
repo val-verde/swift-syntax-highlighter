@@ -160,6 +160,8 @@ public enum Pygments: TokenizationScheme {
              .eof,
              .poundFileIDKeyword:
             break
+        default:
+            break
         }
 
         if tokenSyntax.tokenClassification.kind == .typeIdentifier,
