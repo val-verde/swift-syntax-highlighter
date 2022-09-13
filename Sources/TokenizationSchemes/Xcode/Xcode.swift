@@ -96,7 +96,7 @@ public enum Xcode: TokenizationScheme {
             case .docLineComment(let text),
                  .docBlockComment(let text):
                 return Token(text, kind: Documentation.self)
-            case .garbageText:
+            case .unexpectedText:
                 return nil
             }
         }

@@ -216,7 +216,7 @@ public enum Pygments: TokenizationScheme {
             case .blockComment(let text),
                  .docBlockComment(let text):
                 return Token(text, kind: Comment.MultiLine.self)
-            case .garbageText:
+            case .unexpectedText:
                 return nil
             }
         }
