@@ -22,6 +22,7 @@ let package = Package(
         .target(name: "Highlighter",
                 dependencies: [],
                 linkerSettings: [
+                    .linkedLibrary("SwiftParser"),
                     .linkedLibrary("SwiftSyntax"),
                 ]),
         .target(name: "Pygments",

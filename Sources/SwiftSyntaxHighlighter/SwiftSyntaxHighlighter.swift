@@ -1,4 +1,5 @@
 import SwiftSyntax
+import SwiftParser
 import Highlighter
 import struct Foundation.URL
 
@@ -20,6 +21,7 @@ open class SwiftSyntaxHighlighter: SyntaxAnyVisitor {
     /// - SeeAlso: `Pygments`
     public init(using scheme: TokenizationScheme.Type) {
         self.scheme = scheme
+        super.init(viewMode: .sourceAccurate)
     }
 
     // MARK: - SyntaxAnyVisitor
@@ -38,12 +40,12 @@ open class SwiftSyntaxHighlighter: SyntaxAnyVisitor {
 
 extension SwiftSyntaxHighlighter {
     public class func highlight(source: String, using scheme: TokenizationScheme.Type) throws -> String {
-        let tree = try SyntaxParser.parse(source: source)
+        let tree = try Parser.parse(source: source)
         return try highlight(syntax: tree, using: scheme)
     }
 
     public class func highlight(file url: URL, using scheme: TokenizationScheme.Type) throws -> String {
-        let tree = try SyntaxParser.parse(url)
+        let tree = try Parser.parse(source: String(contentsOf: url))
         return try highlight(syntax: tree, using: scheme)
     }
 
