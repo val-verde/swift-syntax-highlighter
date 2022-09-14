@@ -98,6 +98,8 @@ public enum Xcode: TokenizationScheme {
                 return Token(text, kind: Documentation.self)
             case .unexpectedText:
                 return nil
+            default:
+                return nil
             }
         }
     }

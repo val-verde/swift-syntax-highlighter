@@ -218,6 +218,8 @@ public enum Pygments: TokenizationScheme {
                 return Token(text, kind: Comment.MultiLine.self)
             case .unexpectedText:
                 return nil
+            default:
+                return nil
             }
         }
     }
